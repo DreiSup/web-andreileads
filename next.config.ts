@@ -1,9 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   cacheComponents: true,
   partialPrefetching: true,
+  experimental: {
+    // 404 común para los dos layouts raíz (es / en): app/global-not-found.tsx
+    globalNotFound: true,
+  },
   turbopack: {
     rules: {
       "*.css": {

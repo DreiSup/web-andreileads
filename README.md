@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# web-andreileads
 
-## Getting Started
+Web de Andrei Leads (`andreileads.com`): una sola pantalla, en español (`/`) e inglés (`/en`), con contacto por WhatsApp y email. Diseño «Remitente» (Claude Design; entrega en `mis_datos/designs/andreileads/`).
 
-First, run the development server:
+Next.js 16 (App Router, `cacheComponents`), Tailwind CSS 4 y `next/font`. Sin `@andrei-leads/core`, sin JavaScript de cliente propio y sin terceros (ni cookies, ni analítica, ni fuentes remotas).
+
+## Arrancar en local
+
+Desde `mis_datos/web-andreileads/` (comandos de terminal):
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cp .env.example .env.local   # y edita WHATSAPP con nano
+pnpm install
+pnpm build && pnpm start -p 3005
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`WHATSAPP` es obligatoria (solo dígitos, con prefijo de país, sin `+`). Si falta, el build falla. En Vercel se pone como variable de entorno del proyecto.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Dónde se cambia cada cosa
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Qué | Archivo |
+|---|---|
+| Textos ES/EN | `content/textos.ts` |
+| Email, datos del titular, redes, `indexar` | `lib/sitio.ts` |
+| Colores, fuentes, animaciones (tokens) | `app/globals.css` (`@theme`) y `lib/fuentes.ts` |
+| Pantalla | `components/Tarjeta.tsx` y sus piezas en `components/` |
+| Legales (solo en español) | `app/(es)/aviso-legal`, `privacidad`, `cookies` |
+| Metadatos, hreflang y JSON-LD | `lib/seo.ts` |
 
-## Learn More
+Cada idioma tiene su layout raíz (`app/(es)/layout.tsx`, `app/(en)/layout.tsx`) para llevar su propio `<html lang>`. La 404 común está en `app/global-not-found.tsx`.
 
-To learn more about Next.js, take a look at the following resources:
+## Antes de publicar
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [ ] `lib/sitio.ts` → `titular`: nombre, NIF y domicilio reales (los exige la LSSI).
+- [ ] Privacidad: sustituir `[PROVEEDOR_EMAIL]` por el proveedor del correo de andreileads.com.
+- [ ] `WHATSAPP` en Vercel (Production y Preview).
+- [ ] `indexar: true` en `lib/sitio.ts` (activa index, robots y sitemap).
+- [ ] Vercel Pro si el repo es privado de la organización (Hobby no admite uso comercial).
