@@ -14,7 +14,7 @@ export const sitio = {
   indexar: false,
   /** Datos del aviso legal (LSSI). Se rellenan antes de publicar. */
   titular: {
-    nombre: "[NOMBRE_LEGAL]",
+    nombre: "Andrei Vrednicu",
     nif: "[NIF]",
     domicilio: "[DOMICILIO]",
   },
