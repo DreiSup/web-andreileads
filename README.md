@@ -24,6 +24,7 @@ pnpm build && pnpm start -p 3005
 | Email, datos del titular, redes, `indexar` | `lib/sitio.ts` |
 | Colores, fuentes, animaciones (tokens) | `app/globals.css` (`@theme`) y `lib/fuentes.ts` |
 | Pantalla | `components/Tarjeta.tsx` y sus piezas en `components/` |
+| Logo de la cabecera (SVG vectorizado del PNG de marca) | `components/Logo.tsx` |
 | Legales (solo en español) | `app/(es)/aviso-legal`, `privacidad`, `cookies` |
 | Metadatos, hreflang y JSON-LD | `lib/seo.ts` |
 

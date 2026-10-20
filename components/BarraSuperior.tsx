@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Logo } from "@/components/Logo";
 import { textos, type Idioma } from "@/content/textos";
 
 const enlaceIdioma =
@@ -16,9 +17,9 @@ export function BarraSuperior({ idioma, hrefEs }: Props) {
     <header className="flex min-h-14 flex-wrap items-center justify-between gap-4 md:min-h-[76px]">
       <Link
         href={idioma === "en" ? "/en" : "/"}
-        className="inline-flex min-h-11 items-center rounded font-serif text-xl tracking-[-0.01em] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-tinta md:text-2xl"
+        className="inline-flex min-h-11 items-center rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-tinta"
       >
-        Andrei Leads
+        <Logo className="h-5 w-auto md:h-6" />
       </Link>
       <nav
         aria-label={t.idioma}
